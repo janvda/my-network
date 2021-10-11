@@ -85,6 +85,17 @@ Steps:
    * On this tab you can also get the URL (click on `link` and take the url next to `display result`) to launch the script from the browser
       * the script parameters can be passed as specified in forum topic [How to pass arguments in custom command link url?](https://forum.openwrt.org/t/how-to-pass-arguments-in-custom-command-link-url/108804)
 
+## 4. Create google site page to trigger custom command
+
+Create a google site page with 4 buttons:
+
+* `(re)enable schedule Sterre`
+* `(re)enable schedule others (includes Mirko)`
+* `disable schedule Sterre`
+* `disable schedule others (includes Mirko)`
+
+These buttons open a custom command URL (see previous section) with appropriate 2 parameters to enable/disable the schedule for sterre or mirko.
+
 ## 3. Iphones - disable `Private Address` for `lan_jan` and `lan_jan_5g`
 
 Iphones when connecting to wifi network are each time using a different MAC address.  This makes that DHCP can not use the MAC address to assign a specific IP address.
