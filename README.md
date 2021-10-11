@@ -7,8 +7,8 @@ IP addresses are grouped in 3 groups:
 | name | ip/mask | ip range | description |
 |--:|---|:---:|--|
 | **priviliged** | not in below groups | `192.168.2.1-192.168.2.111` | priviliged devices (Jan Marleen) |
-| **sterre** | `192.168.2.112/24`  | `192.168.2.113-192.168.2.126` | devices Sterre |
-| **mirko_and_co** | `192.168.2.128/23` | `192.168.2.129-192.168.2.254` | all other devices |
+| **sterre** | `192.168.2.112/28`  | `192.168.2.113-192.168.2.126` | devices Sterre |
+| **mirko_and_co** | `192.168.2.128/25` | `192.168.2.129-192.168.2.254` | all other devices |
 
 ### Archer 7 (main router)
 
@@ -16,8 +16,15 @@ Assure that DHCP server gives IP addresses in range **mirko_and_co**.
 For this:
 
 1. goto Network > Interfaces > Edit
-2. Specify `Start = 129` and `Limit = 125``
+2. Specify `Start = 129` and `Limit = 125`
 3. Save the changes.
+
+### Archer 6 (router 1st floor)
+
+Install following packages:
+
+* `ipset` : is needed to use masks ( `/24`)
+
 
 ### Iphones - disable `Private Address` for `lan_jan` and `lan_jan_5g`
 
