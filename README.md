@@ -6,9 +6,9 @@ IP addresses are grouped in 3 groups:
 
 | name | ip/mask | ip range | description |
 |--:|---|:---:|--|
-| **priviliged** | not in below groups | 192.168.2.1-192.168.2.111 | priviliged devices (Jan Marleen) |
-| **sterre** | 192.168.2.112/24  | 192.168.2.113-192.168.2.126 | devices Sterre |
-| **mirko_and_co** | 192.168.2.128/23 | 192.168.2.129-192.168.2.254 | all other devices |
+| **priviliged** | not in below groups | `192.168.2.1-192.168.2.111` | priviliged devices (Jan Marleen) |
+| **sterre** | `192.168.2.112/24`  | `192.168.2.113-192.168.2.126` | devices Sterre |
+| **mirko_and_co** | `192.168.2.128/23` | `192.168.2.129-192.168.2.254` | all other devices |
 
 ### Archer 7 (main router)
 
