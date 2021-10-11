@@ -6,14 +6,13 @@ IP addresses are grouped in 3 groups:
 
 | name | ip/mask | ip range | description |
 |--:|---|:---:|--|
-| **priviliged** | not in below groups | `192.168.2.1-192.168.2.111` | priviliged devices (Jan Marleen) |
-| **sterre** | `192.168.2.112/28`  | `192.168.2.113-192.168.2.126` | devices Sterre |
-| **mirko_and_co** | `192.168.2.128/25` | `192.168.2.129-192.168.2.254` | all other devices |
+| `priviliged` | not in below groups | `192.168.2.1-192.168.2.111` | priviliged devices (Jan Marleen) |
+| `sterre` | `192.168.2.112/28`  | `192.168.2.113-192.168.2.126` | devices Sterre |
+| `mirko_and_co` | `192.168.2.128/25` | `192.168.2.129-192.168.2.254` | all other devices |
 
 ### Archer 7 (main router)
 
-Assure that DHCP server gives IP addresses in range **mirko_and_co**.
-For this:
+Assure that DHCP server gives IP addresses in range `mirko_and_co` be doing below steps:
 
 1. goto Network > Interfaces > Edit
 2. Specify `Start = 129` and `Limit = 125`
@@ -25,6 +24,32 @@ Install following packages:
 
 * `ipset` : is needed to use masks ( `/28`)
 * `luci-app-commands`: is needed for shell commands through URL (custom commands)
+* `kmod-br-netfilter`: is needed to assure that the bridge firewall rules work  (see section *Enable bridge firewall*)
+
+#### Enable bridge firewall
+
+Follow instructions outlined at:
+
+* https://openwrt.org/docs/guide-user/firewall/fw3_configurations/bridge
+
+In other words perform following instructions:
+
+```
+# Install packages
+opkg update
+opkg install kmod-br-netfilter
+ 
+# Configure kernel parameters
+cat << EOF >> /etc/sysctl.conf
+net.bridge.bridge-nf-call-arptables=1
+net.bridge.bridge-nf-call-iptables=1
+net.bridge.bridge-nf-call-ip6tables=1
+EOF
+/etc/init.d/sysctl restart
+
+# Log and status
+/etc/init.d/firewall restart
+```
 
 ### Iphones - disable `Private Address` for `lan_jan` and `lan_jan_5g`
 
