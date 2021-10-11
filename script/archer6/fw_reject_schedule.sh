@@ -25,3 +25,47 @@ else
   echo "ERROR: parameter 2 must be enable or disable"
   exit 2
 fi
+
+index=0
+rule_workdays_idx="undefined"
+while true; do
+        name=$(uci get firewall.@rule[$index].name 2>/dev/null) || break
+        echo "$name"| (grep -q "$rule_workdays") && {
+             #### Do you stuff here with $index ###
+             rule_workdays_idx=$index
+             break
+        }
+        index=$((index+1))
+done
+
+index=0
+rule_weekend_idx="undefined"
+while true; do
+        name=$(uci get firewall.@rule[$index].name 2>/dev/null) || break
+        echo "$name"| (grep -q "$rule_weekend") && {
+             #### Do you stuff here with $index ###
+             rule_weekend_idx=$index
+             break
+        }
+        index=$((index+1))
+done
+
+#echo "index 1: $rule_workdays_idx"                                     
+#echo "index 2: $rule_weekend_idx"                                      
+                                                                        
+if [ "$rule_workdays_idx" = "undefined" ]; then                         
+    echo "ERROR: couldn't find firewall rule with name:$rule_workdays"  
+else                                                                    
+    echo "$2 firewall rule[$rule_workdays_idx]:$rule_workdays"          
+    uci set firewall.@rule[$rule_workdays_idx].enabled=$enabled         
+fi                                                                      
+                                                                        
+if [ "$rule_weekend_idx" = "undefined" ]; then                          
+    echo "ERROR: couldn't find firewall rule with name:$rule_weekend"   
+else                                                                  
+   echo "$2 firewall rule[$rule_weekend_idx]:$rule_weekend"           
+   uci set firewall.@rule[$rule_weekend_idx].enabled=$enabled         
+fi                                                                    
+                                                                      
+uci commit                                                            
+/etc/init.d/firewall restart                                          
