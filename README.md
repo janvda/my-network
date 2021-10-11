@@ -23,8 +23,8 @@ For this:
 
 Install following packages:
 
-* `ipset` : is needed to use masks ( `/24`)
-
+* `ipset` : is needed to use masks ( `/28`)
+* `luci-app-commands`: is needed for shell commands through URL (custom commands)
 
 ### Iphones - disable `Private Address` for `lan_jan` and `lan_jan_5g`
 
