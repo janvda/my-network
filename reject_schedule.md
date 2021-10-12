@@ -15,7 +15,7 @@ IP addresses are grouped in 3 groups:
 | `sterre` | `192.168.2.112/28`  | `192.168.2.113-192.168.2.126` | devices Sterre |
 | `mirko_and_co` | `192.168.2.128/25` | `192.168.2.129-192.168.2.254` | all other devices |
 
-## 1. Archer 7 (main router)
+## 1. [Archer 7 (main router)](http://archer7)
 
 Assure that DHCP server gives IP addresses in range `mirko_and_co` by executing below steps.
 This is important to assure that new devices (or devices with changing MAC address) don't get an IP address in the `priviliged` range.
@@ -24,7 +24,7 @@ This is important to assure that new devices (or devices with changing MAC addre
 2. Specify `Start = 129` and `Limit = 125`
 3. Save the changes.
 
-## 2. Archer 6 (router 1st floor)
+## 2. [Archer 6 (router 1st floor)](http://archer7)
 
 ### 2.1 Install additional packages
 
