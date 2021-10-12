@@ -3,7 +3,7 @@
 This page explains the setup of a firewall reject schedule for the wifi router upstairs.
 So devices having an IP addresses in the group `sterre` or `mirko_and_co` (see below) will only have access to the router during restricted periods during the week.  Outside these periods access will be rejected.
 
-It is possible to disable the reject schedule so that it is possible to access the router outside the period defined by the schedule.
+It is possible to disable these *firewall reject schedules* so that it is possible to access the router outside the periods defined by the schedule.
 
 ## IP groups
 
