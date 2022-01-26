@@ -3,7 +3,7 @@
 # date 2021-10-12
 #
 # usage: 
-#       fw_reject_schedule [sterre|mirko] [enable|disable]
+#       fw_reject_schedule [sterre|mirko|jan|playstation] [enable|disable]
 #       fw_reject_schedule status
 
 rule_sterre_workdays="iprange_sterre_reject_during_workdays"
@@ -11,6 +11,8 @@ rule_sterre_weekend="iprange_sterre_reject_during_weekend"
 rule_mirko_workdays="iprange_mirko_and_co_reject_during_workdays"
 rule_mirko_weekend="iprange_mirko_and_co_reject_during_weekend"
 rule_jan="iphone_jan_reject_test_schedule"
+rule_playstation="playstation_reject"
+rule_not_applicable="not applicable"
 
 enable="not defined"
 if [ $# -eq 1 ]; then
@@ -31,9 +33,12 @@ else
     rule2=$rule_mirko_weekend 
   elif [ "$1" = "jan" ]; then
     rule1=$rule_jan
-    rule2=$rule_jan
+    rule2=$rule_not_applicable
+  elif [ "$1" = "playstation" ]; then
+    rule1=$rule_playstation
+    rule2=$rule_not_applicable
   else
-    echo "ERROR: parameter 1 must be status, mirko, sterre or jan" >&2
+    echo "ERROR: parameter 1 must be status, mirko, sterre, jan or playstation" >&2
     exit 1
   fi
 
@@ -119,9 +124,12 @@ if [ "$1" = "status" ]; then
    get_fw_rule_status $rule_mirko_workdays
    get_fw_rule_status $rule_mirko_weekend
    get_fw_rule_status $rule_jan
+   get_fw_rule_status $rule_playstation
 else
    set_fw_rule_enabled $rule1 $enable
-   set_fw_rule_enabled $rule2 $enable
+   if [ "$rule2" != "$rule_not_applicable" ]; then
+     set_fw_rule_enabled $rule2 $enable
+   fi
    uci commit                                                            
    /etc/init.d/firewall restart
 fi

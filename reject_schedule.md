@@ -5,6 +5,8 @@ So devices having an IP addresses in the group `sterre` or `mirko_and_co` (see b
 
 It is possible to disable these *firewall reject schedules* so that it is possible to access the router outside the periods defined by the schedule.
 
+It also covers the firewall rule to reject access to the playstation.
+
 ## IP groups
 
 IP addresses are grouped in 3 groups:
@@ -13,7 +15,7 @@ IP addresses are grouped in 3 groups:
 |--:|---|:---:|--|
 | `priviliged` | not in below groups | `192.168.2.1-192.168.2.111` | priviliged devices (Jan Marleen) |
 | `sterre` | `192.168.2.112/28`  | `192.168.2.113-192.168.2.126` | devices Sterre |
-| `mirko_and_co` | `192.168.2.128/25` | `192.168.2.129-192.168.2.254` | all other devices |
+| `mirko_and_co` | `192.168.2.128/25` | `192.168.2.129-192.168.2.254` | all other devices (includes ps4 (playstation) = `192.168.2.131`) |
 
 ## 1. [Archer 7 (main router)](http://archer7)
 
@@ -46,7 +48,7 @@ Follow instructions outlined at:
 
 In other words perform following instructions:
 
-```
+```sh
 # Install packages
 opkg update
 opkg install kmod-br-netfilter
@@ -67,12 +69,14 @@ EOF
 
 From web interface goto Network > Firewall > Traffic Rules and add rules that "reject" access for the IP groups `sterre` and `mirko_and_co` during the workdays and during the weekend.
 
-So the following 4 rules are created:
+So the following rules are created:
 
 * `iprange_sterre_reject_during_workdays`
 * `iprange_sterre_reject_during_weekend`
 * `iprange_mirko_and_co_reject_during_workdays`
 * `iprange_mirko_and_co_reject_during_weekend`
+* `playstation_reject`
+* `iphone_jan_reject_test_schedule`  (only used for testing)
 
 ### 2.4 Create custom command to disable/enable the schedule firewall rules
 
@@ -93,8 +97,10 @@ Create a google site page with 4 buttons:
 * `(re)enable schedule others (includes Mirko)`
 * `disable schedule Sterre`
 * `disable schedule others (includes Mirko)`
+* `block playstation`
+* `unblock playstation`
 
-These buttons open a custom command URL (see previous section) with appropriate 2 parameters to enable/disable the schedule for sterre or mirko.
+These buttons open a custom command URL (see previous section) with appropriate 2 parameters to enable/disable the schedule for sterre or mirko or to block/unblock internet access for playstation.
 
 ## 3. Iphones - disable `Private Address` for `lan_jan` and `lan_jan_5g`
 
